@@ -1,5 +1,6 @@
 module.exports = function (cfg) {
   cfg.addPassthroughCopy("css");
+  cfg.addPassthroughCopy("js");
   cfg.addPassthroughCopy("images");
 
   return {
