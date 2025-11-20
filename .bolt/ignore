@@ -1,2 +1,5 @@
 # Do NOT allow AI to edit the main Eleventy layout
 src/_layouts/base.njk
+# Prevent WebContainer runtime from injecting scripts (fixes CSP error)
+.webcontainer
+/.webcontainer*
