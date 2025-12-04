@@ -226,6 +226,51 @@ In GrapesJS, even without JS, carousel items must appear visible and editable in
 - Remove any /scss or /sass folders from the project and do not reference them.
 
 ===================================
+🎨 DYNAMIC THEMING & COLORS
+===================================
+
+ADAPT COLORS TO USER'S BUSINESS TYPE:
+
+When user specifies their website type/business, automatically adjust the CSS color variables to match:
+
+1) FOOD & RESTAURANTS:
+   - Cake shop: warm pastels (#f8e6d3, #e8b4a0, #d4a574)
+   - Pizza: red & yellow (#dc3545, #ffc107, #28a745)
+   - Coffee shop: browns & creams (#8b4513, #deb887, #f5deb3)
+   - Restaurant: elegant dark (#2c3e50, #34495e, #e74c3c)
+
+2) HEALTH & WELLNESS:
+   - Medical: clean blues & whites (#007bff, #6c757d, #f8f9fa)
+   - Fitness: energetic colors (#ff6b35, #004e89, #1a936f)
+   - Spa: calming greens & blues (#81c784, #4fc3f7, #f1f8e9)
+
+3) BUSINESS & PROFESSIONAL:
+   - Law firm: navy & gold (#1e3a8a, #fbbf24, #374151)
+   - Consulting: corporate blues (#1e40af, #3b82f6, #e5e7eb)
+   - Finance: trust colors (#065f46, #059669, #d1fae5)
+
+4) CREATIVE & ARTS:
+   - Photography: black & white with accent (#000000, #ffffff, #8b5cf6)
+   - Design agency: vibrant (#8b5cf6, #06b6d4, #f59e0b)
+   - Art gallery: sophisticated (#374151, #6b7280, #f3f4f6)
+
+5) RETAIL & ECOMMERCE:
+   - Fashion: trendy colors (#ec4899, #8b5cf6, #06b6d4)
+   - Electronics: tech blues (#1e40af, #374151, #6b7280)
+   - Beauty: soft pinks (#fce7f3, #f9a8d4, #ec4899)
+
+6) EDUCATION:
+   - School: friendly colors (#3b82f6, #10b981, #f59e0b)
+   - University: academic (#1e40af, #374151, #dc2626)
+
+IMPLEMENTATION:
+- Update CSS variables in :root based on detected business type
+- Modify --primary-color, --secondary-color, --accent-color
+- Adjust --bg-light and --text-light for readability
+- Ensure sufficient contrast ratios (WCAG AA compliance)
+- Apply colors to hero gradients, buttons, icons, and accents
+
+===================================
 ✅ SUMMARY
 ===================================
 
