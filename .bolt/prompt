@@ -270,6 +270,110 @@ IMPLEMENTATION:
 - Ensure sufficient contrast ratios (WCAG AA compliance)
 - Apply colors to hero gradients, buttons, icons, and accents
 
+TOPBAR STYLING RULE:
+.site-header .topbar {
+  background: var(--primary-color); /* SINGLE COLOR ONLY - NO LINEAR GRADIENT */
+}
+
+===================================
+📄 PAGE-SPECIFIC SECTIONS
+===================================
+
+CUSTOMIZE SECTIONS FOR EACH PAGE TYPE:
+
+1) HOME PAGE:
+   - Hero with value proposition
+   - Features/Services overview
+   - About us summary
+   - Testimonials/Reviews
+   - Call-to-action
+
+2) ABOUT PAGE:
+   - Company story hero
+   - Mission/Vision/Values
+   - Team members
+   - Company timeline/milestones
+   - Awards/Certifications
+
+3) SERVICES PAGE:
+   - Services hero
+   - Service categories grid
+   - Process/How it works
+   - Pricing/Packages
+   - FAQ section
+
+4) CONTACT PAGE:
+   - Contact hero
+   - Contact form
+   - Office locations/Map
+   - Contact information
+   - Business hours
+
+5) PORTFOLIO/GALLERY:
+   - Portfolio hero
+   - Project categories
+   - Image gallery grid
+   - Case studies
+   - Client testimonials
+
+6) BLOG/NEWS:
+   - Blog hero
+   - Featured articles
+   - Article categories
+   - Recent posts grid
+   - Newsletter signup
+
+7) PRIVACY POLICY PAGE:
+   - Legal hero section
+   - Information collection section
+   - Data usage section
+   - Cookie policy
+   - Contact for privacy concerns
+
+8) TERMS & CONDITIONS PAGE:
+   - Terms hero section
+   - Service terms
+   - User responsibilities
+   - Limitation of liability
+   - Governing law
+
+===================================
+🎯 HEADER & FOOTER CUSTOMIZATION
+===================================
+
+ADAPT HEADER & FOOTER FOR EACH WEBSITE TYPE:
+
+1) RESTAURANT/FOOD:
+   - Header: Menu, Reservations, Order Online, Contact
+   - Footer: Hours, Location, Social media, Newsletter
+
+2) MEDICAL/HEALTHCARE:
+   - Header: Services, Doctors, Appointments, Patient Portal
+   - Footer: Emergency contact, Insurance, Privacy policy
+
+3) BUSINESS/CORPORATE:
+   - Header: About, Services, Solutions, Contact
+   - Footer: Locations, Careers, Legal, Investor relations
+
+4) RETAIL/ECOMMERCE:
+   - Header: Shop, Categories, Cart, Account
+   - Footer: Shipping info, Returns, Size guide, Support
+
+5) EDUCATION:
+   - Header: Programs, Admissions, Students, Faculty
+   - Footer: Campus info, Resources, Alumni, Events
+
+6) CREATIVE/PORTFOLIO:
+   - Header: Work, About, Services, Contact
+   - Footer: Social links, Behance/Dribbble, Blog
+
+IMPLEMENTATION:
+- Update navigation links in header.html based on business type
+- Modify footer content and links accordingly
+- Adjust contact information format
+- Include relevant social media platforms
+- Add business-specific CTAs (Book Now, Shop, Get Quote, etc.)
+
 ===================================
 ✅ SUMMARY
 ===================================
