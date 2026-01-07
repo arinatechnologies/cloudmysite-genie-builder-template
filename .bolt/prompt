@@ -18,7 +18,7 @@ src/
   _partials/header.html
   _partials/footer.html
 
-css/
+css/        ← ALL CSS files ONLY here
 js/
 images/
 lib/        ← only if needed after cleanup
@@ -44,7 +44,8 @@ For each page (index.html, about.html, contact.html, etc.):
 layout: ../_layouts/base.njk
 title: "Page Title"
 permalink: "/page.html"
-extra_css: []
+extra_css:
+  - "/css/page.css"
 extra_js: []
 ---
 
@@ -58,7 +59,6 @@ extra_js: []
 
 3) CONTACT PAGE FORM RULE:
 If a page has a contact form, it MUST use:
-
 <form id="contactForm"
       class="custom-contact-form"
       data-form-handler
@@ -67,12 +67,18 @@ If a page has a contact form, it MUST use:
       data-success="Thank you! We will get back to you soon."
       data-error="Oops! Something went wrong."
       data-report-label="template-form">
-
   <!-- Form fields here -->
-
 </form>
-
 This structure must be preserved so JS can handle submission.
+
+4)Page CSS rule (IMPORTANT):
+Each page MUST have its own CSS file
+All CSS files must live in /css/
+Example:
+index.html → /css/index.css
+about.html → /css/about.css
+contact.html → /css/contact.css
+No inline styles. No CSS outside /css.
 
 ===================================
 🧱 LAYOUT & PARTIALS
@@ -264,16 +270,16 @@ When user specifies their website type/business, automatically adjust the CSS co
    - University: academic (#1e40af, #374151, #dc2626)
 
 IMPLEMENTATION:
-- Update CSS variables in :root based on detected business type
-- Modify --primary-color, --secondary-color, --accent-color
-- Adjust --bg-light and --text-light for readability
-- Ensure sufficient contrast ratios (WCAG AA compliance)
-- Apply colors to hero gradients, buttons, icons, and accents
-
-TOPBAR STYLING RULE:
-.site-header .topbar {
-  background: var(--primary-color); /* SINGLE COLOR ONLY - NO LINEAR GRADIENT */
-}
+- When a business type is selected, choose the matching predefined color palette and apply those colors directly in CSS (do not use :root or var() anywhere).
+- Each HTML page must have its own dedicated CSS file inside the /css folder, and all section colors for that page must be defined only in that page’s CSS file.
+- Every major section on a page (hero, features, content, testimonials, highlights, CTA) must explicitly define its own background color using the selected palette.
+- Use the primary palette color for hero sections, lighter palette colors for content sections, medium or accent colors for highlights/testimonials, and the strongest contrasting color for CTA sections.
+- Do not allow two adjacent sections to share the same background color; ensure clear visual separation between sections.
+- Header and footer colors must be controlled only by header.css and footer.css, using solid colors that visually match the selected business palette.
+- Apply palette colors consistently to section backgrounds, buttons, badges, icons, and emphasis blocks within the same page CSS file.
+- Ensure text and button contrast meets accessibility standards and remains readable on all background colors.
+- Avoid global theming or shared color logic; styling must be page-scoped, predictable, and GrapesJS-friendly.
+- Do not place background images for key visuals in CSS; all visual emphasis must rely on colors and editable HTML elements.
 
 ===================================
 📄 PAGE-SPECIFIC SECTIONS
