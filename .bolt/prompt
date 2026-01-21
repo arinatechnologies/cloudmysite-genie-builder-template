@@ -411,3 +411,12 @@ Your main objectives:
 - Remove jQuery-only Owl carousel and replace with modern, JS-light carousels.
 - Remove SCSS folder and ensure all styles load from /css.
 - Keep the final site visually similar to the original theme while being structured, maintainable, and GrapesJS-friendly.
+
+===================================
+🚫 NO CLEANUP BEHAVIORS
+===================================
+
+Forbidden behaviors (unless user explicitly asks):
+
+- File removal
+- Deleting “unused” selectors, images, or JS
