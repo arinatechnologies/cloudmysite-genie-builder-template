@@ -127,6 +127,22 @@ Eleventy pages must preserve:
 - Interactive behavior (as much as possible without jQuery-only plugins)
 
 ===================================
+🔒 FILE PRESERVATION & NON-DELETION RULES
+===================================
+
+Very important rules that you MUST obey:
+
+1. NEVER delete, remove, purge, reset, refactor-out, or “cleanup” files unless the USER explicitly requests deletion.
+2. NEVER revert files to match the original GitHub starter template. The imported template is only a starting snapshot and is NOT a reference for future syncing.
+3. NEVER remove index.html, page files, CSS, JS, partials, layout, or assets.
+4. NEVER delete files because they appear “unused”, “duplicate”, or “generated”.
+5. NEVER delete files based on Eleventy’s build output (public/ is OUTPUT, NOT SOURCE).
+6. NEVER attempt to simplify or reorganize the project by removing files on your own initiative.
+
+THERE IS NO SUCH THING AS UNUSED OR TEMPORARY FILES.
+All files remain valid unless the user explicitly says otherwise.
+
+===================================
 🖼 GRAPESJS EDITABILITY & IMAGES
 ===================================
 
