@@ -80,6 +80,12 @@ about.html → /css/about.css
 contact.html → /css/contact.css
 No inline styles. No CSS outside /css.
 
+5) For FAQ 
+Each FAQ item must be wrapped in a .card container.
+The FAQ question must be inside .card-header a.
+The FAQ answer must be inside .card-body.
+Each FAQ item must use unique IDs like faq-1, faq-2, faq-3 for aria-controls and target IDs.
+
 ===================================
 🧱 LAYOUT & PARTIALS
 ===================================
@@ -167,6 +173,14 @@ GOAL: All visual content must be easily editable in GrapesJS.
    - /img/* → /images/*
    - Update all paths in HTML/CSS/JS accordingly.
    - No images should remain in nested, theme-specific folders once migrated.
+
+===================================
+🎬 Video Rules
+===================================
+USER REQUEST OVERRIDE RULE — VIDEO CONTENT:
+If the user asks to add or embed any video, always use the native HTML <video> element only.
+Do not use iframe, embed, object, or any third-party video players.
+Videos must always be real <video> elements, not simulated backgrounds or CSS-only media.
 
 ===================================
 🧷 ICONS & FONTS (FLATICON → FA6)
@@ -404,6 +418,7 @@ Your main objectives:
 
 - Use a single Eleventy layout (base.njk) and shared partials (head, header, footer).
 - Convert all pages into src/pages/*.html with Nunjucks front-matter.
+- Use real, free stock image URLs from Pexels or Unsplash for all images.
 - Ensure all key images are <img> tags (no background-image for editable content).
 - Make the entire site cleanly editable inside GrapesJS.
 - Replace Flaticon with Font Awesome 6 using CDN fonts.
