@@ -1,437 +1,99 @@
-You are working inside an Eleventy (11ty) project that must be fully editable inside GrapesJS.
+You are working inside an Eleventy (11ty) project that must be fully editable in GrapesJS.
 
-Assume:
-- approval_policy: never
-- Commit directly to main
-- Do NOT create branches or ask questions
-
-===================================
-📁 PROJECT STRUCTURE & FILE RULES
-===================================
-
-All work happens in this structure:
-
-src/
-  pages/*.html        ← all pages (index, about, contact, etc.)
-  _layouts/base.njk   ← single global layout
-  _partials/head.html
-  _partials/header.html
-  _partials/footer.html
-
-css/        ← ALL CSS files ONLY here
+PROJECT STRUCTURE:
+src/pages/*.html
+src/_layouts/base.njk
+src/_partials/head.html
+src/_partials/header.html
+src/_partials/footer.html
+css/ (ALL CSS here)
 js/
 images/
-lib/        ← only if needed after cleanup
+lib/ (only if needed)
+Output: public/
+Passthrough: /css, /js, /images, /assets
 
-Output directory: public/
+RULES:
+- Pages only in src/pages/*.html (Nunjucks allowed)
+- Partials only in src/_partials/
+- Layout only src/_layouts/base.njk
+- Do not delete any files unless user explicitly asks
 
-Passthrough: /css, /js, /images, /assets (if present).
-
-FILE LOCATION RULES:
-- Pages: always in src/pages/ with .html extension (Nunjucks allowed).
-- Partials: only in src/_partials/.
-- Layout: only src/_layouts/base.njk.
-- You may freely update head.html, header.html, footer.html, base.njk, and any page in src/pages/.
-
-===================================
-📄 PAGE GENERATION RULES
-===================================
-
-For each page (index.html, about.html, contact.html, etc.):
-
-1) Use this front-matter:
----
+PAGE FRONT MATTER (mandatory):
 layout: ../_layouts/base.njk
 title: "Page Title"
 permalink: "/page.html"
-extra_css:
-  - "/css/page.css"
+extra_css: ["/css/page.css"]
 extra_js: []
----
 
-2) Each page MUST have at least 4–5 clear content sections, e.g.:
-   - Hero / Top banner
-   - Features / Services
-   - About / Info
-   - Testimonials / Logos / Social proof
-   - FAQ
-   - Call-to-action (CTA)
-
-3) CONTACT PAGE FORM RULE:
-If a page has a contact form, it MUST use:
-<form id="contactForm"
-      class="custom-contact-form"
-      data-form-handler
-      data-api=""
-      data-from="noreply@example.com"
-      data-success="Thank you! We will get back to you soon."
-      data-error="Oops! Something went wrong."
-      data-report-label="template-form">
-  <!-- Form fields here -->
-</form>
-This structure must be preserved so JS can handle submission.
-
-4)Page CSS rule (IMPORTANT):
-Each page MUST have its own CSS file
-All CSS files must live in /css/
-Example:
-index.html → /css/index.css
-about.html → /css/about.css
-contact.html → /css/contact.css
-No inline styles. No CSS outside /css.
-
-5) For FAQ 
-Each FAQ item must be wrapped in a .card container.
-The FAQ question must be inside .card-header a.
-The FAQ answer must be inside .card-body.
-Each FAQ item must use unique IDs like faq-1, faq-2, faq-3 for aria-controls and target IDs.
-
-===================================
-🧱 LAYOUT & PARTIALS
-===================================
-
-Create and maintain exactly ONE of each:
-
-- src/_partials/head.html
-- src/_partials/header.html
-- src/_partials/footer.html
-
-base.njk must:
-
-- Include head, header, and footer partials
-- Render page content as:
-  <main>
-    {{ content | safe }}
-  </main>
-- Load global CSS/JS:
-  - /css/header.css
-  - /css/footer.css
-  - /js/base.js
-  - /js/form-handler.js
-- Loop and include any extra_css / extra_js arrays from front-matter without duplicates.
-
-HEADER RULE:
-- src/_partials/header.html must be plain, valid HTML for the nav (no Eleventy-specific placeholder logic in the markup).
-- Navigation must be styled via /css/header.css (e.g., forced background, high z-index, cleaned toggler styles).
-
-===================================
-🔁 HTML → ELEVENTY CONVERSION
-===================================
-
-For each imported static HTML theme page:
-
-1) Extract the real main content (central container) and put it in src/pages/*.html.
-2) Remove duplicated head/header/footer markup; use base.njk + partials instead.
-3) Rewrite asset URLs as root-relative:
-   - /css/...
-   - /js/...
-   - /images/...
-
-Eleventy pages must preserve:
-- Original look & layout
-- Menus and URLs
-- Interactive behavior (as much as possible without jQuery-only plugins)
-
-===================================
-🔒 FILE PRESERVATION & NON-DELETION RULES
-===================================
-
-Very important rules that you MUST obey:
-
-1. NEVER delete, remove, purge, reset, refactor-out, or “cleanup” files unless the USER explicitly requests deletion.
-2. NEVER revert files to match the original GitHub starter template. The imported template is only a starting snapshot and is NOT a reference for future syncing.
-3. NEVER remove index.html, page files, CSS, JS, partials, layout, or assets.
-4. NEVER delete files because they appear “unused”, “duplicate”, or “generated”.
-5. NEVER delete files based on Eleventy’s build output (public/ is OUTPUT, NOT SOURCE).
-6. NEVER attempt to simplify or reorganize the project by removing files on your own initiative.
-
-THERE IS NO SUCH THING AS UNUSED OR TEMPORARY FILES.
-All files remain valid unless the user explicitly says otherwise.
-
-===================================
-🖼 GRAPESJS EDITABILITY & IMAGES
-===================================
-
-GOAL: All visual content must be easily editable in GrapesJS.
-
-1) All meaningful images must be <img> elements in the HTML.
-   - Do NOT hide key images inside CSS background-image.
-   - Example:
-     ❌ style="background-image: url('/images/carousel-1.jpg');"
-     ✅ <img src="/images/carousel-1.jpg" alt="...">
-
-2) If CSS previously used background-image for key visuals, move them into <img> tags in the HTML structure instead.
-
-3) For overlay/hover effects that might block clicks in the editor:
-   - Overlays can use:
-     pointer-events: none;
-     z-index: 0;
-   - Ensure the <img> itself remains easily clickable in GrapesJS.
-
-4) Restructure/move assets:
-   - /assets/images/* → /images/*
-   - /img/* → /images/*
-   - Update all paths in HTML/CSS/JS accordingly.
-   - No images should remain in nested, theme-specific folders once migrated.
-
-===================================
-🎬 Video Rules
-===================================
-USER REQUEST OVERRIDE RULE — VIDEO CONTENT:
-If the user asks to add or embed any video, always use the native HTML <video> element only.
-Do not use iframe, embed, object, or any third-party video players.
-Videos must always be real <video> elements, not simulated backgrounds or CSS-only media.
-
-===================================
-🧷 ICONS & FONTS (FLATICON → FA6)
-===================================
-
-1) Remove Flaticon:
-   - Remove all flaticon CSS and font files.
-   - Delete /lib/flaticon/* and flaticon.css (or equivalent).
-   - Replace all .flaticon-* icon classes with Font Awesome 6 equivalents (use appropriate fa-solid / fa-regular / fa-brands classes).
-
-2) In head.html, include CDN fonts only (no local /fonts folder):
-
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/icomoon/1.0.0/style.min.css">
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer" />
-
-3) Ensure any icon markup in HTML and CSS is updated to use the new Font Awesome classes.
-
-===================================
-📦 BOOTSTRAP 4 → BOOTSTRAP 5 CLEANUP
-===================================
-
-Update markup and attributes:
-
-- data-toggle   → data-bs-toggle
-- data-target   → data-bs-target
-- mr-*          → me-*
-- ml-*          → ms-*
-- form-group    → mb-3 (or equivalent modern spacing)
-
-Ensure dropdowns and togglers have correct ARIA attributes for Bootstrap 5 patterns.
-
-===================================
-🎠 CAROUSEL MODERNIZATION (NO OWL)
-===================================
-
-Remove jQuery-only carousel code:
-
-- Delete /lib/owlcarousel/* and /lib/waypoints/*, /lib/counterup/* if only used with jQuery/Owl.
-- Remove jQuery-dependent scripts from pages and extra_js.
-
-Convert Owl-style markup:
-
-OLD:
-<div class="categories-carousel owl-carousel">
-  <!-- items -->
-</div>
-
-NEW:
-<div class="categories-carousel carousel-scroll">
-  <button class="carousel-nav prev" type="button" aria-label="Previous">‹</button>
-  <div class="carousel-track">
-    <!-- original item blocks go here -->
-  </div>
-  <button class="carousel-nav next" type="button" aria-label="Next">›</button>
-</div>
-
-Add to main CSS:
-- scroll-snap based horizontal scrolling
-- flex layout for .carousel-track
-- responsive item sizing
-- simple styles for .carousel-nav buttons
-
-Add to /js/main.js (no jQuery):
-- On DOMContentLoaded, attach click handlers to each carousel’s nav buttons.
-- Scroll the track left/right by ~80% of its width.
-
-In GrapesJS, even without JS, carousel items must appear visible and editable in the editor.
-
-===================================
-🧾 SCSS → CSS
-===================================
-
-- Move any compiled CSS files into /css.
-- Update all HTML references to point to /css/*.css.
-- Remove any /scss or /sass folders from the project and do not reference them.
-
-===================================
-🎨 DYNAMIC THEMING & COLORS
-===================================
-
-ADAPT COLORS TO USER'S BUSINESS TYPE:
-
-When user specifies their website type/business, automatically adjust the CSS color variables to match:
-
-1) FOOD & RESTAURANTS:
-   - Cake shop: warm pastels (#f8e6d3, #e8b4a0, #d4a574)
-   - Pizza: red & yellow (#dc3545, #ffc107, #28a745)
-   - Coffee shop: browns & creams (#8b4513, #deb887, #f5deb3)
-   - Restaurant: elegant dark (#2c3e50, #34495e, #e74c3c)
-
-2) HEALTH & WELLNESS:
-   - Medical: clean blues & whites (#007bff, #6c757d, #f8f9fa)
-   - Fitness: energetic colors (#ff6b35, #004e89, #1a936f)
-   - Spa: calming greens & blues (#81c784, #4fc3f7, #f1f8e9)
-
-3) BUSINESS & PROFESSIONAL:
-   - Law firm: navy & gold (#1e3a8a, #fbbf24, #374151)
-   - Consulting: corporate blues (#1e40af, #3b82f6, #e5e7eb)
-   - Finance: trust colors (#065f46, #059669, #d1fae5)
-
-4) CREATIVE & ARTS:
-   - Photography: black & white with accent (#000000, #ffffff, #8b5cf6)
-   - Design agency: vibrant (#8b5cf6, #06b6d4, #f59e0b)
-   - Art gallery: sophisticated (#374151, #6b7280, #f3f4f6)
-
-5) RETAIL & ECOMMERCE:
-   - Fashion: trendy colors (#ec4899, #8b5cf6, #06b6d4)
-   - Electronics: tech blues (#1e40af, #374151, #6b7280)
-   - Beauty: soft pinks (#fce7f3, #f9a8d4, #ec4899)
-
-6) EDUCATION:
-   - School: friendly colors (#3b82f6, #10b981, #f59e0b)
-   - University: academic (#1e40af, #374151, #dc2626)
-
-IMPLEMENTATION:
-- When a business type is selected, choose the matching predefined color palette and apply those colors directly in CSS (do not use :root or var() anywhere).
-- Each HTML page must have its own dedicated CSS file inside the /css folder, and all section colors for that page must be defined only in that page’s CSS file.
-- Every major section on a page (hero, features, content, testimonials, highlights, CTA) must explicitly define its own background color using the selected palette.
-- Use the primary palette color for hero sections, lighter palette colors for content sections, medium or accent colors for highlights/testimonials, and the strongest contrasting color for CTA sections.
-- Do not allow two adjacent sections to share the same background color; ensure clear visual separation between sections.
-- Header and footer colors must be controlled only by header.css and footer.css, using solid colors that visually match the selected business palette.
-- Apply palette colors consistently to section backgrounds, buttons, badges, icons, and emphasis blocks within the same page CSS file.
-- Ensure text and button contrast meets accessibility standards and remains readable on all background colors.
-- Avoid global theming or shared color logic; styling must be page-scoped, predictable, and GrapesJS-friendly.
-- Do not place background images for key visuals in CSS; all visual emphasis must rely on colors and editable HTML elements.
-
-===================================
-📄 PAGE-SPECIFIC SECTIONS
-===================================
-
-CUSTOMIZE SECTIONS FOR EACH PAGE TYPE:
-
-1) HOME PAGE:
-   - Hero with value proposition
-   - Features/Services overview
-   - About us summary
-   - Testimonials/Reviews
-   - Call-to-action
-
-2) ABOUT PAGE:
-   - Company story hero
-   - Mission/Vision/Values
-   - Team members
-   - Company timeline/milestones
-   - Awards/Certifications
-
-3) SERVICES PAGE:
-   - Services hero
-   - Service categories grid
-   - Process/How it works
-   - Pricing/Packages
-   - FAQ section
-
-4) CONTACT PAGE:
-   - Contact hero
-   - Contact form
-   - Office locations/Map
-   - Contact information
-   - Business hours
-
-5) PORTFOLIO/GALLERY:
-   - Portfolio hero
-   - Project categories
-   - Image gallery grid
-   - Case studies
-   - Client testimonials
-
-6) BLOG/NEWS:
-   - Blog hero
-   - Featured articles
-   - Article categories
-   - Recent posts grid
-   - Newsletter signup
-
-7) PRIVACY POLICY PAGE:
-   - Legal hero section
-   - Information collection section
-   - Data usage section
-   - Cookie policy
-   - Contact for privacy concerns
-
-8) TERMS & CONDITIONS PAGE:
-   - Terms hero section
-   - Service terms
-   - User responsibilities
-   - Limitation of liability
-   - Governing law
-
-===================================
-🎯 HEADER & FOOTER CUSTOMIZATION
-===================================
-
-ADAPT HEADER & FOOTER FOR EACH WEBSITE TYPE:
-
-1) RESTAURANT/FOOD:
-   - Header: Menu, Reservations, Order Online, Contact
-   - Footer: Hours, Location, Social media, Newsletter
-
-2) MEDICAL/HEALTHCARE:
-   - Header: Services, Doctors, Appointments, Patient Portal
-   - Footer: Emergency contact, Insurance, Privacy policy
-
-3) BUSINESS/CORPORATE:
-   - Header: About, Services, Solutions, Contact
-   - Footer: Locations, Careers, Legal, Investor relations
-
-4) RETAIL/ECOMMERCE:
-   - Header: Shop, Categories, Cart, Account
-   - Footer: Shipping info, Returns, Size guide, Support
-
-5) EDUCATION:
-   - Header: Programs, Admissions, Students, Faculty
-   - Footer: Campus info, Resources, Alumni, Events
-
-6) CREATIVE/PORTFOLIO:
-   - Header: Work, About, Services, Contact
-   - Footer: Social links, Behance/Dribbble, Blog
-
-IMPLEMENTATION:
-- Update navigation links in header.html based on business type
-- Modify footer content and links accordingly
-- Adjust contact information format
-- Include relevant social media platforms
-- Add business-specific CTAs (Book Now, Shop, Get Quote, etc.)
-
-===================================
-✅ SUMMARY
-===================================
-
-Your main objectives:
-
-- Use a single Eleventy layout (base.njk) and shared partials (head, header, footer).
-- Convert all pages into src/pages/*.html with Nunjucks front-matter.
-- Use real, free stock image URLs from Pexels or Unsplash for all images.
-- Ensure all key images are <img> tags (no background-image for editable content).
-- Make the entire site cleanly editable inside GrapesJS.
-- Replace Flaticon with Font Awesome 6 using CDN fonts.
-- Modernize to Bootstrap 5 patterns.
-- Remove jQuery-only Owl carousel and replace with modern, JS-light carousels.
-- Remove SCSS folder and ensure all styles load from /css.
-- Keep the final site visually similar to the original theme while being structured, maintainable, and GrapesJS-friendly.
-
-===================================
-🚫 NO CLEANUP BEHAVIORS
-===================================
-
-Forbidden behaviors (unless user explicitly asks):
-
-- File removal
-- Deleting “unused” selectors, images, or JS
+CONTACT FORM (mandatory structure):
+<form id="contactForm" class="custom-contact-form" data-form-handler data-api="" data-from="noreply@example.com" data-success="Thank you! We will get back to you soon." data-error="Oops! Something went wrong." data-report-label="template-form">
+
+FAQ RULE:
+.card → .card-header a → .card-body  
+Use unique IDs faq-1, faq-2, faq-3 with aria-controls
+
+CSS:
+- Each page has its own /css/page.css
+- No inline CSS, no scss/sass
+- Header/footer styles only in header.css/footer.css
+
+LAYOUT RULES:
+base.njk must include:
+- head, header, footer
+- <main>{{ content | safe }}</main>
+- Load /css/header.css, /css/footer.css, /js/base.js, /js/form-handler.js
+- Load extra_css and extra_js without duplicates
+
+IMAGES & VIDEO (GRAPESJS EDITABLE):
+- All key visuals must be real <img> or <video> elements (no CSS background-image for key visuals)
+- If an image or video is meant to behave like a background/hero background:
+  - It must still be an actual <img> or <video> element
+  - Styled to cover full section 
+  - Must visually behave as a background but remain editable in GrapesJS
+- Use real, free stock image URLs from Pexels or Unsplash for all images
+- Move all images to /images and update paths
+- Overlays must not block clicks (pointer-events: none)
+
+VIDEO:
+If user requests video, always use native <video> element only (no iframe or embeds)
+
+ICONS & BOOTSTRAP:
+Use Font Awesome 6 + Icomoon CDN only, Bootstrap 5 attributes only
+
+CAROUSEL:
+No Owl/jQuery; use scroll-snap carousel + buttons, JS in /js/main.js (no jQuery)
+
+SECTION RULE (CONTEXT-AWARE):
+Each page must have 4-5 sections that match both the business type and the page purpose (Home, About, Services, etc.).
+Do not reuse generic sections blindly; sections must be context-relevant (e.g., Cake Shop Home = Hero, Featured Cakes, Services, Reviews, CTA).
+No filler sections — every section must make sense for that page and business.
+
+PAGES:
+Core pages: Home, About, Services, Contact, Blog, Privacy, Terms
+Depending on website/business type, add relevant pages:
+- Restaurant/Food: Menu, Reservations, Order Online
+- Medical: Doctors, Appointments, Insurance
+- Business: Solutions, Careers
+- Ecommerce: Shop, Categories, Cart
+- Education: Programs, Admissions
+Each page must follow section rules.
+
+COLOR THEMING:
+Apply palette based on business type:
+- Food, Health, Business, Creative, Retail, Education
+- Apply colors directly in each page’s CSS file
+- No CSS variables
+- No background images for key visuals
+- Adjacent sections must not share same background color
+- Header/footer colors controlled only by header.css/footer.css
+- Ensure readable contrast
+
+HEADER/FOOTER:
+Adapt nav and footer links based on business type.
+
+NEVER:
+- Delete files
+- Clean up unused files
+- Revert to starter template
+- Remove assets
