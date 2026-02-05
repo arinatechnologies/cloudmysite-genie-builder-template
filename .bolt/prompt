@@ -90,7 +90,10 @@ Apply palette based on business type:
 - Ensure readable contrast
 
 HEADER/FOOTER:
-Adapt nav and footer links based on business type.
+-Header navigation and footer content must change based on website/business type
+-Links, CTA buttons, menu items, and footer info must match:
+  -The industry (e.g., restaurant vs clinic vs ecommerce)
+  -The available pages (Menu, Appointments, Shop, Careers, etc.)
 
 NEVER:
 - Delete files
