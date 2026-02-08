@@ -19,6 +19,15 @@ RULES:
 - Layout only src/_layouts/base.njk
 - Do not delete any files unless user explicitly asks
 
+ANTI-DARK DEFAULT:
+
+- Never set body, html, main, or section backgrounds to black or dark colors.
+- If a dark tone is required, it may only be used in small components (≤120px tall) such as:
+  - buttons
+  - icons
+  - badges
+  - thin separators
+
 PAGE FRONT MATTER (mandatory):
 layout: ../_layouts/base.njk
 title: "Page Title"
@@ -79,15 +88,90 @@ Depending on website/business type, add relevant pages:
 - Education: Programs, Admissions
 Each page must follow section rules.
 
-COLOR THEMING:
-Apply palette based on business type:
-- Food, Health, Business, Creative, Retail, Education
-- Apply colors directly in each page’s CSS file
-- No CSS variables
-- No background images for key visuals
-- Adjacent sections must not share same background color
-- Header/footer colors controlled only by header.css/footer.css
-- Ensure readable contrast
+COLOR THEMING (ENFORCED LIGHT + VARIETY):
+
+- Global default MUST be a LIGHT theme.
+  - body background must be white (#ffffff) or a light surface color.
+  - body text color must be dark gray (#111827 – #1f2937), never white.
+
+- NEVER use pure black (#000000) or near-black colors as page or section backgrounds.
+  - Dark colors may only be used for small accents (buttons, icons, badges, dividers).
+  - No section, main container, or body background may be dark.
+
+- For every site, choose exactly ONE palette based on the business type and apply it consistently.
+  - Write the chosen palette as a comment at the top of each page CSS file:
+    /* Palette: primary #____, secondary #____, accent #____, neutral #____, surface #____ */
+
+- Use ONLY the following palettes (do not invent new ones):
+
+  Food:
+    primary #d9480f
+    secondary #f59f00
+    accent #2f9e44
+    neutral #1f2937
+    surface #fff7ed
+
+  Health:
+    primary #0ea5e9
+    secondary #22c55e
+    accent #0f766e
+    neutral #0f172a
+    surface #f0f9ff
+
+  Business:
+    primary #2563eb
+    secondary #0f172a
+    accent #f97316
+    neutral #111827
+    surface #f8fafc
+
+  Creative:
+    primary #a855f7
+    secondary #ec4899
+    accent #06b6d4
+    neutral #111827
+    surface #faf5ff
+
+  Retail / Ecommerce:
+    primary #db2777
+    secondary #111827
+    accent #f59e0b
+    neutral #111827
+    surface #fff1f2
+
+  Education:
+    primary #4338ca
+    secondary #2563eb
+    accent #f59e0b
+    neutral #0f172a
+    surface #eef2ff
+
+- Section background rule (strict):
+  - Adjacent sections MUST NOT share the same background color.
+  - Alternate between white and the palette's surface color.
+  - At least two sections per page must use the surface color.
+
+- Buttons:
+  - Primary CTA buttons must use the palette primary color.
+  - Secondary buttons must be transparent with a primary-color border.
+
+- Apply colors directly in each page’s CSS file.
+- No CSS variables.
+
+STYLE DIVERSITY (MANDATORY):
+
+For each generated website, choose ONE style direction and apply it consistently
+through spacing, border-radius, and component shape.
+
+Choose exactly one:
+- Style A: Minimal corporate (sharp corners, subtle shadows)
+- Style B: Friendly rounded (rounded corners, soft shadows)
+- Style C: Editorial (larger typography, generous whitespace)
+- Style D: Bold cards (visible borders, colorful accents)
+
+Write the chosen style at the top of /css/home.css as a comment:
+  /* Style Direction: B - Friendly rounded */
+
 
 HEADER/FOOTER:
 -Header navigation and footer content must change based on website/business type
